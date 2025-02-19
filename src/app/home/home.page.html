@@ -1,20 +1,42 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>File Manager</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <!-- File Input Screen -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Manage Files</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">File Name</ion-label>
+        <ion-input [(ngModel)]="fileName" required></ion-input>
+      </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+      <ion-item>
+        <ion-label position="floating">Text</ion-label>
+        <ion-textarea [(ngModel)]="fileContent"></ion-textarea>
+      </ion-item>
+
+      <ion-button expand="full" (click)="saveFile()">Save</ion-button>
+      <ion-button expand="full" color="warning" (click)="updateFile()">Update</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- File List Screen -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Saved Files</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let file of fileList" (click)="presentActionSheet(file)">
+          <ion-label>{{ file }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
