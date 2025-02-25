@@ -1,11 +1,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>File Manager</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="'/file-page'">
+        <ion-icon name="arrow-forward-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- File Input Screen -->
   <ion-card>
     <ion-card-header>
       <ion-card-title>Manage Files</ion-card-title>
@@ -23,20 +27,6 @@
 
       <ion-button expand="full" (click)="saveFile()">Save</ion-button>
       <ion-button expand="full" color="warning" (click)="updateFile()">Update</ion-button>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- File List Screen -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Saved Files</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let file of fileList" (click)="presentActionSheet(file)">
-          <ion-label>{{ file }}</ion-label>
-        </ion-item>
-      </ion-list>
     </ion-card-content>
   </ion-card>
 </ion-content>
