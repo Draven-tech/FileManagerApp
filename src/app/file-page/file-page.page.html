@@ -1,11 +1,6 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Saved Files</ion-title>
-    <ion-buttons slot="start">
-      <ion-button [routerLink]="'/file-manager'">
-        <ion-icon name="arrow-back-circle"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -20,6 +15,11 @@
           <ion-label>{{ file }}</ion-label>
         </ion-item>
       </ion-list>
+
+      <ion-button expand="full" color="primary" [routerLink]="'/home'">
+        <ion-icon slot="start" name="arrow-back-circle"></ion-icon>
+        Back to Home
+      </ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

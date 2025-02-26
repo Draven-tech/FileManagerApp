@@ -4,6 +4,7 @@ import { IonicModule, AlertController, ActionSheetController } from '@ionic/angu
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,11 @@ export class HomePage {
   fileList: string[] = [];
   isEditing: boolean = false;
 
-  constructor(private alertCtrl: AlertController, private actionSheetCtrl: ActionSheetController) {
+  constructor(
+    private alertCtrl: AlertController, 
+    private actionSheetCtrl: ActionSheetController,
+    private router: Router
+  ) {
     this.refreshFileList();
   }
 
@@ -37,13 +42,15 @@ export class HomePage {
       }
       
       await Filesystem.writeFile({
-        path: this.fileName,
+        path: `${this.fileName}.txt`, // Ensure unique naming
         data: this.fileContent,
         directory: Directory.Documents,
         encoding: Encoding.UTF8
       });
       
       alert('File created successfully!');
+      this.fileName = '';
+      this.fileContent = '';
       this.refreshFileList();
     } catch (error) {
       console.error('Error saving file:', error);
@@ -58,13 +65,16 @@ export class HomePage {
     
     try {
       await Filesystem.writeFile({
-        path: this.fileName,
+        path: `${this.fileName}.txt`,
         data: this.fileContent,
         directory: Directory.Documents,
         encoding: Encoding.UTF8
       });
       
       alert('File updated successfully!');
+      this.fileName = '';
+      this.fileContent = '';
+      this.isEditing = false;
       this.refreshFileList();
     } catch (error) {
       console.error('Error updating file:', error);
@@ -102,7 +112,7 @@ export class HomePage {
   }
 
   async editFile(file: string) {
-    this.fileName = file;
+    this.fileName = file.replace('.txt', ''); // Remove extension for UI display
     this.isEditing = true;
     await this.readFile(file);
   }
@@ -151,5 +161,9 @@ export class HomePage {
     } catch (error) {
       console.error('Error reading directory:', error);
     }
+  }
+
+  navigateToFiles() {
+    this.router.navigate(['/file-page']);
   }
 }

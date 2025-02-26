@@ -1,11 +1,6 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>File Manager</ion-title>
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="'/file-page'">
-        <ion-icon name="arrow-forward-circle"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -25,8 +20,13 @@
         <ion-textarea [(ngModel)]="fileContent"></ion-textarea>
       </ion-item>
 
-      <ion-button expand="full" (click)="saveFile()">Save</ion-button>
       <ion-button expand="full" color="warning" (click)="updateFile()">Update</ion-button>
+      <ion-button expand="full" (click)="saveFile()">Save</ion-button>
+
+      <ion-button expand="full" color="primary" [routerLink]="'/file-page'">
+        <ion-icon slot="start" name="arrow-forward-circle"></ion-icon>
+        Go to File Page
+      </ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
